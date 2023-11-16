@@ -23,12 +23,12 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/icon-512x512.png",
-    shortcut: "/android-chrome-192x192.png",
-    apple: "/icon-512x512.png",
+    icon: "/icons/icon-512x512.png",
+    shortcut: "/icons/android-chrome-192x192.png",
+    apple: "/icons/icon-512x512.png",
     other: {
       rel: "apple-touch-icon-precomposed",
-      url: "/icon-512x512.png",
+      url: "/icons/icon-512x512.png",
     },
   },
   manifest: "manifest.json",

@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function useSound(url: string): [play: () => void] {
-    const [audio] = useState(() => new Audio(url));
-    
-    const play = () => {
-        audio.currentTime = 0;
-        audio.play();
-    };
-    
-    return [play];
-    };
-    
+  const [audio, setAudio] = useState<HTMLAudioElement>();
+
+  useEffect(() => {
+    setAudio(new Audio(url));
+  }, [url]);
+
+  const play = () => {
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play();
+    }
+  };
+
+  return [play];
+}
