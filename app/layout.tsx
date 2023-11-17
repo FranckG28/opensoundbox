@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: "Sikish Sounds",
     images: [
       {
-        url: "/icons/og.png",
+        url: "https://sikish.tgimenez.fr/icons/og.png",
         width: 800,
         height: 600,
       },
@@ -23,12 +23,12 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/icons/icon-512x512.png",
-    shortcut: "/icons/android-chrome-192x192.png",
-    apple: "/icons/icon-512x512.png",
+    icon: "https://sikish.tgimenez.fr/icons/icon-512x512.png",
+    shortcut: "https://sikish.tgimenez.fr/icons/android-chrome-192x192.png",
+    apple: "https://sikish.tgimenez.fr/icons/icon-512x512.png",
     other: {
       rel: "apple-touch-icon-precomposed",
-      url: "/icons/icon-512x512.png",
+      url: "https://sikish.tgimenez.fr/icons/icon-512x512.png",
     },
   },
   manifest: "manifest.json",
