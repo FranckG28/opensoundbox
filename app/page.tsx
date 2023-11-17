@@ -10,13 +10,15 @@ async function getData(): Promise<{ sounds: Sound[] }> {
     throw new Error("Missing AIRTABLE_SOUNDS_TABLE");
   }
 
+  const { signal } = new AbortController();
+
   const res = await fetch(
     process.env.AIRTABLE_URL + process.env.AIRTABLE_SOUNDS_TABLE,
     {
       headers: {
         Authorization: "Bearer " + process.env.AIRTABLE_PAT_KEY,
       },
-      next: { revalidate: 3600 },
+      signal,
     }
   );
 
@@ -26,8 +28,6 @@ async function getData(): Promise<{ sounds: Sound[] }> {
   }
 
   const result = await res.json();
-
-  console.log(result.records[0].fields);
 
   return {
     sounds: result.records

@@ -3,8 +3,6 @@ import SoundGrid from "./SoundGrid";
 import Container from "./Container";
 
 export default function HomePage({ sounds }: { sounds: Sound[] }) {
-  console.log(sounds);
-
   return (
     <>
       <main className="bg-[#006198] py-8">
