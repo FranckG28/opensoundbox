@@ -16,7 +16,7 @@ export default function HomePage({ sounds }: { sounds: Sound[] }) {
       </main>
       <footer className="w-full bg-[#FE000B] py-6">
         <Container>
-          <p className="text-lg">La fabrique de vos sonorités préférées</p>
+          <p className="text-lg">La fabrique de vos sonorités préférées.</p>
         </Container>
       </footer>
     </>
