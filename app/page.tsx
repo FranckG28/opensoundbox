@@ -16,6 +16,7 @@ async function getData(): Promise<{ sounds: Sound[] }> {
       headers: {
         Authorization: "Bearer " + process.env.AIRTABLE_PAT_KEY,
       },
+      next: { revalidate: 3600 },
     }
   );
 
@@ -29,11 +30,13 @@ async function getData(): Promise<{ sounds: Sound[] }> {
   console.log(result.records[0].fields);
 
   return {
-    sounds: result.records.map((record: any) => ({
-      title: record.fields.title,
-      audio: record.fields.audio[0].url,
-      image: record.fields.image[0].thumbnails?.large.url,
-    })),
+    sounds: result.records
+      .map((record: any) => ({
+        title: record.fields.title,
+        audio: record.fields.audio?.[0].url,
+        image: record.fields.image?.[0].thumbnails?.large.url,
+      }))
+      .filter((sound: Sound) => !!sound.audio),
   };
 }
 

@@ -3,11 +3,13 @@ import SoundGrid from "./SoundGrid";
 import Container from "./Container";
 
 export default function HomePage({ sounds }: { sounds: Sound[] }) {
+  console.log(sounds);
+
   return (
     <>
       <main className="bg-[#006198] py-8">
         <Container>
-          <h1 className="text-5xl font-medium text-white leading-loose">
+          <h1 className="text-3xl lg:text-5xl font-medium text-white leading-loose tracking-tight">
             <span className="font-bold">Sikish</span> Sounds
           </h1>
 
