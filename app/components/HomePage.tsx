@@ -7,7 +7,7 @@ export default function HomePage({ sounds }: { sounds: Sound[] }) {
     <>
       <main className="bg-[#006198] py-8">
         <Container>
-          <h1 className="text-3xl lg:text-5xl font-medium text-white leading-loose tracking-tight">
+          <h1 className="text-xl lg:text-3xl font-medium text-white leading-loose tracking-tight">
             <span className="font-bold">Sikish</span> Sounds
           </h1>
 
