@@ -2,10 +2,11 @@
 
 import { Configuration } from "@/models/configuration";
 import { configuration } from "../defaults";
+import { airtableRecordsToObject } from "../utils";
 
 export default async function getConfiguration(): Promise<Configuration> {
 
-    if (!process.env.AIRTABLE_CONFIGURATION_TABLE) {
+    if (!process.env.AIRTABLE_CONFIG_TABLE) {
         return configuration;
     }
 
@@ -18,7 +19,7 @@ export default async function getConfiguration(): Promise<Configuration> {
     }
 
     const res = await fetch(
-        process.env.AIRTABLE_URL + process.env.AIRTABLE_CONFIGURATION_TABLE,
+        process.env.AIRTABLE_URL + process.env.AIRTABLE_CONFIG_TABLE,
         {
             headers: {
                 Authorization: "Bearer " + process.env.AIRTABLE_PAT_KEY,
@@ -33,10 +34,16 @@ export default async function getConfiguration(): Promise<Configuration> {
 
     const result = await res.json();
 
-    console.log("configuration", result.records);
+    try {
+        const parsedConfig = airtableRecordsToObject(result.records);
 
-    return {
+        return {
+            ...configuration,
+            ...parsedConfig,
+        };
 
+    } catch (e) {
+        console.error("Failed to parse configuration", e);
+        throw new Error("Failed to parse configuration. See logs for details.");
     }
-
 } 
