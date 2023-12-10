@@ -11,6 +11,10 @@ export async function getSounds(): Promise<{ sounds: Sound[] }> {
         throw new Error("Missing AIRTABLE_SOUNDS_TABLE");
     }
 
+    if (!process.env.AIRTABLE_PAT_KEY) {
+        throw new Error("Missing AIRTABLE_PAT_KEY");
+    }
+
     const res = await fetch(
         process.env.AIRTABLE_URL + process.env.AIRTABLE_SOUNDS_TABLE,
         {
@@ -22,7 +26,6 @@ export async function getSounds(): Promise<{ sounds: Sound[] }> {
     );
 
     if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
         throw new Error("Failed to fetch data : " + res.statusText);
     }
 
