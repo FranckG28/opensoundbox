@@ -2,7 +2,7 @@
 
 import { Sound } from "@/models/sound";
 
-export async function getSounds(): Promise<{ sounds: Sound[] }> {
+export async function getSounds(): Promise<Sound[]> {
     if (!process.env.AIRTABLE_URL) {
         throw new Error("Missing AIRTABLE_URL");
     }
@@ -31,13 +31,11 @@ export async function getSounds(): Promise<{ sounds: Sound[] }> {
 
     const result = await res.json();
 
-    return {
-        sounds: result.records
-            .map((record: any) => ({
-                title: record.fields.title,
-                audio: record.fields.audio?.[0].url,
-                image: record.fields.image?.[0].thumbnails?.large.url,
-            }))
-            .filter((sound: Sound) => !!sound.audio),
-    };
+    return result.records
+        .map((record: any) => ({
+            title: record.fields.title,
+            audio: record.fields.audio?.[0].url,
+            image: record.fields.image?.[0].thumbnails?.large.url,
+        }))
+        .filter((sound: Sound) => !!sound.audio);
 }

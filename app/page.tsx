@@ -40,7 +40,8 @@ export async function generateMetadata(
 }
 
 export default async function Page() {
-  const { sounds } = await getSounds();
+  const data = await Promise.all([getConfiguration(), getSounds()]);
+  const [configuration, sounds] = data;
 
-  return <HomePage sounds={sounds} />;
+  return <HomePage sounds={sounds} configuration={configuration} />;
 }
