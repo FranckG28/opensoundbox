@@ -22,7 +22,7 @@ async function getData(): Promise<{ sounds: Sound[] }> {
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch data : " + res.statusText);
   }
 
   const result = await res.json();
