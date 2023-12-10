@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js + Airtable Soundbox
+
+This is a fully customizable soundboard app built with Next.js and Airtable. 
+It's mobile friendly and support SSG with Next.js 14.
+
+The content is stored in Airtable and can be edited remotely in the Airtable UI.
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup your Airtable project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This app use two tables :
 
-## Learn More
+- One for the application content
+- One for the application configuration
 
-To learn more about Next.js, take a look at the following resources:
+### Sounds table
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The table containing sounds must have the following columns:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+title: string
+audio: Attachment
+image: Attachment
+```
 
-## Deploy on Vercel
+If multiples files are uploaded in the same cell, only the first one will be used.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Configuration table
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This table is optional. If it's not present, the app will use the default values.
+
+The table must have the following columns :
+
+```
+key: string
+value: string
+image: Attachment
+```
+
+See [the customization section](#customization) for more details.
+
+### Linking the app to your airtable project
+
+You must provide your Airtable PAT, Project URL and Tables IDs in environment variables.
+
+Check the .env.example file for more details.
+
+## Customization
+
+Your soundbox can be fully customized without any code modification. 
+You can change the colors, the logo, the favicon, the title and the description in the Airtable UI.
+
+The following keys are available in the configuration table :
+
+```
+Todo
+```
+
+
+
+## About caching
+
+Unfortunately, Airtable webhooks are not available in the free plan. This means that we have no way to trigger the revalidate route when the content is updated in Airtable.
+
+To ensure that the content is up to date, we use a cache with a TTL of only 30 seconds for the sounds table.
+
+The configuration table has a TTL of 1 hour, since Airtable files URL are only for approximately 2 hours.
