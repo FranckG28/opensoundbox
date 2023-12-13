@@ -1,32 +1,36 @@
 import { MetadataRoute } from "next";
+import getConfiguration from "./actions/getConfiguration";
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+
+  const configuration = await getConfiguration();
+
   return {
-    name: "Sikish Sounds",
-    short_name: "Sikish Sounds",
-    description: "La fabriques de vos sonorités préférées.",
+    name: configuration.name,
+    short_name: configuration.name,
+    description: configuration.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#006198",
-    theme_color: "#006198",
+    background_color: configuration.backgroundColor,
+    theme_color: configuration.backgroundColor,
     icons: [
       {
-        src: "/icons/icon-512x512.png",
+        src: configuration.icon512,
         sizes: "512x512",
         type: "image/png",
       },
       {
-        src: "/icons/android-chrome-192x192.png",
+        src: configuration.icon192,
         sizes: "192x192",
         type: "image/png",
       },
       {
-        src: "/icons/android-chrome-384x384.png",
+        src: configuration.icon384,
         sizes: "384x384",
         type: "image/png",
       },
       {
-        src: "/favicon.ico",
+        src: configuration.icon512,
         sizes: "any",
         type: "image/x-icon",
       },

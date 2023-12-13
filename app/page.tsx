@@ -1,45 +1,47 @@
-import { Sound } from "@/models/sound";
+import getConfiguration from "./actions/getConfiguration";
+import { getSounds } from "./actions/getSounds";
 import HomePage from "./components/HomePage";
+import type { Metadata, ResolvingMetadata } from "next";
 
-async function getData(): Promise<{ sounds: Sound[] }> {
-  if (!process.env.AIRTABLE_URL) {
-    throw new Error("Missing AIRTABLE_URL");
-  }
-
-  if (!process.env.AIRTABLE_SOUNDS_TABLE) {
-    throw new Error("Missing AIRTABLE_SOUNDS_TABLE");
-  }
-
-  const res = await fetch(
-    process.env.AIRTABLE_URL + process.env.AIRTABLE_SOUNDS_TABLE,
-    {
-      headers: {
-        Authorization: "Bearer " + process.env.AIRTABLE_PAT_KEY,
-      },
-      next: { revalidate: 30 },
-    }
-  );
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  const result = await res.json();
+export async function generateMetadata(
+  { params, searchParams }: any,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const configuration = await getConfiguration();
 
   return {
-    sounds: result.records
-      .map((record: any) => ({
-        title: record.fields.title,
-        audio: record.fields.audio?.[0].url,
-        image: record.fields.image?.[0].thumbnails?.large.url,
-      }))
-      .filter((sound: Sound) => !!sound.audio),
+    title: configuration.name,
+    description: configuration.description,
+    openGraph: {
+      title: configuration.name,
+      description: configuration.description,
+      url: configuration.appUrl,
+      siteName: configuration.name,
+      images: [
+        {
+          url: configuration.ogImage,
+          width: 800,
+          height: 600,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    icons: {
+      icon: configuration.icon512,
+      shortcut: configuration.icon192,
+      apple: configuration.icon512,
+      other: {
+        rel: "apple-touch-icon-precomposed",
+        url: configuration.icon512,
+      },
+    },
   };
 }
 
 export default async function Page() {
-  const { sounds } = await getData();
+  const data = await Promise.all([getConfiguration(), getSounds()]);
+  const [configuration, sounds] = data;
 
-  return <HomePage sounds={sounds} />;
+  return <HomePage sounds={sounds} configuration={configuration} />;
 }

@@ -3,7 +3,7 @@ import SoundCard from "./SoundCard";
 
 export default function SoundGrid({ sounds }: { sounds: Sound[] }) {
   if (!sounds?.length) {
-    return <p className="text-lg text-slate-200">Meuch ...</p>;
+    return <p className="text-lg text-slate-200">No sounds found ...</p>;
   }
 
   return (

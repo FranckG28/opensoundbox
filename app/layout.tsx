@@ -1,38 +1,7 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Sikish Sounds",
-  description: "La fabrique de vos sonorités préférées.",
-  openGraph: {
-    title: "Sikish Sounds",
-    description: "La fabrique de vos sonorités préférées.",
-    url: "https://sikish.tgimenez.com",
-    siteName: "Sikish Sounds",
-    images: [
-      {
-        url: "https://sikish.tgimenez.fr/icons/og.png",
-        width: 800,
-        height: 600,
-      },
-    ],
-    locale: "fr_FR",
-    type: "website",
-  },
-  icons: {
-    icon: "https://sikish.tgimenez.fr/icons/icon-512x512.png",
-    shortcut: "https://sikish.tgimenez.fr/icons/android-chrome-192x192.png",
-    apple: "https://sikish.tgimenez.fr/icons/icon-512x512.png",
-    other: {
-      rel: "apple-touch-icon-precomposed",
-      url: "https://sikish.tgimenez.fr/icons/icon-512x512.png",
-    },
-  },
-  manifest: "manifest.json",
-};
 
 export default function RootLayout({
   children,
