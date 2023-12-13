@@ -1,4 +1,4 @@
-# Next.js + Airtable Soundbox
+![image](https://github.com/FranckG28/sikish-sounds/assets/19238963/c8478ac5-df0b-413f-aecf-3bb00ad949ab)
 
 This is a fully customizable soundboard app built with Next.js and Airtable. 
 It's mobile friendly and support SSG with Next.js 14.
