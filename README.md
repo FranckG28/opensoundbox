@@ -66,7 +66,6 @@ Todo
 ```
 
 
-
 ## About caching
 
 Unfortunately, Airtable webhooks are not available in the free plan. This means that we have no way to trigger the revalidate route when the content is updated in Airtable.
@@ -74,3 +73,5 @@ Unfortunately, Airtable webhooks are not available in the free plan. This means 
 To ensure that the content is up to date, we use a cache with a TTL of only 30 seconds for the sounds table.
 
 The configuration table has a TTL of 1 hour, since Airtable files URL are only for approximately 2 hours.
+
+To revalidate the cache to get the latest content & configuration instantly, you can send a GET request to <your app url>/api/relidate.
