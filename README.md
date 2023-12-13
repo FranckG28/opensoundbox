@@ -61,9 +61,21 @@ You can change the colors, the logo, the favicon, the title and the description 
 
 The following keys are available in the configuration table :
 
-```
-Todo
-```
+| name           | type       | default value                   |
+|----------------|------------|---------------------------------|
+| name           | string     | My soundbox                     |
+| description    | string     | A soundbox to make some noise.  |
+| footerText     | string     | Made with ❤️ by Franck G.        |
+| backgroundColor| string     | #006198                         |
+| footerColor    | string     | #FE000B                         |
+| titleColor     | string     | #ffffff                         |
+| appUrl         | string     |                                 |
+| footerTextColor| string     | #ffffff                         |
+| favicon        | Attachment | "/favicon.ico"                  |
+| ogImage        | Attachment | "/soundbox-og.png"              |
+| icon512        | Attachment | "/icons/soundbox-512.png"       |
+| icon384        | Attachment | "/icons/soundbox-384.png"       |
+| icon192        | Attachment | "/icons/soundbox-192.png"       |
 
 
 ## About caching
