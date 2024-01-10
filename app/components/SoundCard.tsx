@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Sound } from "@/models/sound";
@@ -13,7 +14,7 @@ export default function SoundCard({ sound }: { sound: Sound }) {
       key={sound.title}
       className="relative bg-white shadow-md rounded-lg overflow-hidden transition group hover:scale-105 active:scale-95"
     >
-      <Image
+      <img
         className="w-full h-48 object-cover transition brightness-80 group-hover:brightness-100"
         src={sound.image}
         alt={sound.title}
